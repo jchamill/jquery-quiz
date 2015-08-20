@@ -7,12 +7,11 @@
 <body>
 <div id="quiz">
   <div id="quiz-header">
-    <h1 id="custom-logo">Basic Quiz Demo</h1>
-    <p><a id="custom-home">Home</a></p>
+    <h1>Basic Quiz Demo</h1>
+    <p><a id="quiz-home-btn">Home</a></p>
   </div>
   <div id="quiz-start-screen">
-    <h1>Custom Start Screen</h1>
-    <div><a href="#" id="quiz-start-btn" class="quiz-button">Begin</a></div>
+    <p><a href="#" id="quiz-start-btn" class="quiz-button">Start</a></p>
   </div>
 </div>
 
@@ -22,7 +21,7 @@
   $('#quiz').quiz({
     //resultsScreen: '#results-screen',
     //counter: false,
-    homeButton: '#custom-home',
+    //homeButton: '#custom-home',
     counterFormat: 'Question %current of %total',
     questions: [
       {
