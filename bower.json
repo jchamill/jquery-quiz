@@ -1,0 +1,21 @@
+{
+  "name": "jquery-quiz",
+  "version": "0.0.1",
+  "authors": [
+    "JC Hamill <jchamill@creativeshampoo.com"
+  ],
+  "description": "A simple jQuery quiz plugin.",
+  "main": [
+    "dist/jquery.quiz.js",
+    "dist/jquery.quiz.css"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": ">=1.6"
+  },
+  "ignore": [
+    "**/.*",
+    "demo",
+    "node_modules"
+  ]
+}

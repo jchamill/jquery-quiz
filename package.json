@@ -1,0 +1,29 @@
+{
+  "name": "jquery-quiz",
+  "version": "0.0.1",
+  "title": "jquery-quiz",
+  "author": {
+    "name": "JC Hamill",
+    "url": "https://github.com/jchamill"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.9",
+    "grunt-contrib-uglify": "=2.4.17",
+    "grunt-contrib-cssmin": "~3.3.0"
+  },
+  "main": "dist/jquery.quiz.min.js",
+  "description": "A simple jQuery quiz plugin.",
+  "homepage": "http://jchamill.github.com/jquery-quiz/",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jchamill/jquery-quiz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jchamill/jquery-quiz/issues"
+  }
+}
