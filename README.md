@@ -58,48 +58,48 @@ Don't forget to include jQuery.
 ####Options####
 
 `allowIncorrect: boolean [default: true]`
-If false, the quiz will show the gameOver screen if a
-question is answered incorrectly. This will force the user
-to get a perfect score to complete the quiz.
+> If false, the quiz will show the gameOver screen if a
+> question is answered incorrectly. This will force the user
+> to get a perfect score to complete the quiz.
 
 `counter: boolean [default: true]`
-If true, a counter will be shown displaying the current
-question and how many questions there are. The output
-of the counter can be customized using `counterFormat`.
+> If true, a counter will be shown displaying the current
+> question and how many questions there are. The output
+> of the counter can be customized using `counterFormat`.
 
 `counterFormat: string [default: '%current/%total']`
-Specify the counter format. The placehoder `%current`
-displays which question you are currently on. The placeholder
-`%total` displays the total number of questions.
+> Specify the counter format. The placehoder `%current`
+> displays which question you are currently on. The placeholder
+> `%total` displays the total number of questions.
 
 `startScreen: string [default: '#quiz-start-screen']`
-The id selector of the start screen. The start screen should
-contain the start button.
+> The id selector of the start screen. The start screen should
+> contain the start button.
 
 `startButton: string [default: '#quiz-start-btn']`
-The id selector of the start button.
+> The id selector of the start button.
 
 `homeButton: string [default: '#quiz-home-btn']`
-The id selector of the home button.
+> The id selector of the home button.
 
 `resultsScreen: string [default: '#quiz-results-screen']`
-The id selector of the results screen. This screen will
-display the number of questions correct.
+> The id selector of the results screen. This screen will
+> display the number of questions correct.
 
 `gameOverScreen: string [default: '#quiz-gameover-screen']`
-The id selector of the game over screen. This screen is
-used when `allowIncorrect` is set to false.
+> The id selector of the game over screen. This screen is
+> used when `allowIncorrect` is set to false.
 
 ####Callbacks####
 
 `answerCallback: function [default: undefined]`
-Callback fired after an answer is selected.
+> Callback fired after an answer is selected.
 
 `nextCallback: function [default: undefined]`
-Callback fired after the next button is clicked.
+> Callback fired after the next button is clicked.
 
 `finishCallback: function [default: undefined]`
-Callback fired after the finish button is clicked.
+> Callback fired after the finish button is clicked.
 
 `homeCallback: function [default: undefined]`
-Callback fired after the home button is clicked.
+> Callback fired after the home button is clicked.
