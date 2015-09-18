@@ -21,7 +21,8 @@
       resultsScreen = base.options.resultsScreen,
       gameOverScreen = base.options.gameOverScreen,
       currentQuestion = 1,
-      score = 0;
+      score = 0,
+      answerLocked = false;
 
     base.methods = {
       init: function() {
@@ -113,6 +114,11 @@
         base.methods.updateCounter();
       },
       answerQuestion: function(answerEl) {
+        if (answerLocked) {
+          return;
+        }
+        answerLocked = true;
+
         var $answerEl = $(answerEl),
           response = '',
           selected = $answerEl.data('index'),
@@ -140,6 +146,8 @@
         }
       },
       nextQuestion: function() {
+        answerLocked = false;
+
         $('.active-question')
           .hide()
           .removeClass('active-question')
@@ -200,6 +208,7 @@
         base.methods.updateCounter();
       },
       reset: function() {
+        answerLocked = false;
         currentQuestion = 1;
         score = 0;
         $('.answers a').removeClass('correct incorrect');
