@@ -1,17 +1,17 @@
-#jQuery Quiz Plugin
+# jQuery Quiz Plugin
 
 A simple jQuery quiz plugin.
 
-##Disclaimer
+## Disclaimer
 
 This is a very simple quiz plugin I created to port quizzes from
 an existing platform. It creates simple multiple choice quizzes.
 You can customize most of the screens that are displayed, as well
 as the text displayed.
 
-##Usage
+## Usage
 
-###HTML
+### HTML
 
 ```
 <div id="quiz">
@@ -29,7 +29,7 @@ as the text displayed.
 You may optionally add other HTML, this is just the markup
 required by the plugin (although home button is optional).
 
-###Javascript
+### Javascript
 
 ```javascript
 $('#quiz').quiz({
@@ -55,7 +55,7 @@ different number of options (answers) for each question.
 
 Don't forget to include jQuery.
 
-####Options
+#### Options
 
 `allowIncorrect: boolean [default: true]`
 > If false, the quiz will show the gameOver screen if a
@@ -104,7 +104,7 @@ Don't forget to include jQuery.
 `restartButtonText: string [default: 'Restart']`
 > The text to display on the restart button.
 
-####Callbacks
+#### Callbacks
 
 `answerCallback: function [default: undefined]`
 > Callback fired after an answer is selected.
