@@ -182,6 +182,7 @@
         $('#quiz-gameover-response').html(response);
         $('#quiz-counter').hide();
         $('#questions').hide();
+        $('#quiz-finish-btn').hide();
         $(gameOverScreen).show();
       },
       finish: function() {
