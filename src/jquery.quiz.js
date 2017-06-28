@@ -20,6 +20,9 @@
       homeButton = base.options.homeButton,
       resultsScreen = base.options.resultsScreen,
       gameOverScreen = base.options.gameOverScreen,
+      nextButtonText = base.options.nextButtonText,
+      finishButtonText = base.options.finishButtonText,
+      restartButtonText = base.options.restartButtonText,
       currentQuestion = 1,
       score = 0,
       answerLocked = false;
@@ -88,9 +91,9 @@
         quizHtml += '<div id="quiz-controls">';
         quizHtml += '<p id="quiz-response"></p>';
         quizHtml += '<div id="quiz-buttons">';
-        quizHtml += '<a href="#" id="quiz-next-btn">Next</a>';
-        quizHtml += '<a href="#" id="quiz-finish-btn">Finish</a>';
-        quizHtml += '<a href="#" id="quiz-restart-btn">Restart</a>';
+        quizHtml += '<a href="#" id="quiz-next-btn">' + nextButtonText + '</a>';
+        quizHtml += '<a href="#" id="quiz-finish-btn">' + finishButtonText + '</a>';
+        quizHtml += '<a href="#" id="quiz-restart-btn">' + restartButtonText + '</a>';
         quizHtml += '</div>';
         quizHtml += '</div>';
 
@@ -175,7 +178,7 @@
           var quizHtml = '';
           quizHtml += '<div id="' + gameOverScreen.substr(1) + '">';
           quizHtml += '<p id="quiz-gameover-response"></p>';
-          quizHtml += '<p><a href="#" id="quiz-retry-btn">Retry</a></p>';
+          quizHtml += '<p><a href="#" id="quiz-retry-btn">' + restartButtonText + '</a></p>';
           quizHtml += '</div>';
           base.$el.append(quizHtml);
         }
@@ -194,7 +197,8 @@
         $('#quiz-next-btn').hide();
         $('#quiz-restart-btn').show();
         $(resultsScreen).show();
-        $('#quiz-results').html('You got ' + score + ' out of ' + numQuestions + ' correct!');
+        var resultsStr = base.options.resultsFormat.replace('%score', score).replace('%total', numQuestions);
+        $('#quiz-results').html(resultsStr);
 
         if (typeof base.options.finishCallback === 'function') {
           base.options.finishCallback();
@@ -249,7 +253,11 @@
     startButton: '#quiz-start-btn',
     homeButton: '#quiz-home-btn',
     resultsScreen: '#quiz-results-screen',
-    gameOverScreen: '#quiz-gameover-screen'
+    resultsFormat: 'You got %score out of %total correct!',
+    gameOverScreen: '#quiz-gameover-screen',
+    nextButtonText: 'Next',
+    finishButtonText: 'Finish',
+    restartButtonText: 'Restart'
   };
 
   $.fn.quiz = function(options) {

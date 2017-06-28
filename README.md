@@ -1,17 +1,17 @@
-#jQuery Quiz Plugin#
+#jQuery Quiz Plugin
 
 A simple jQuery quiz plugin.
 
-##Disclaimer##
+##Disclaimer
 
-This was just a test project I started to port quizzes from
-an existing platform very easily. It does all of the things
-the existing platform (or lack there of, it was just raw code
-duplicated across each quiz) did.
+This is a very simple quiz plugin I created to port quizzes from
+an existing platform. It creates simple multiple choice quizzes.
+You can customize most of the screens that are displayed, as well
+as the text displayed.
 
-##Usage##
+##Usage
 
-###HTML###
+###HTML
 
 ```
 <div id="quiz">
@@ -29,7 +29,7 @@ duplicated across each quiz) did.
 You may optionally add other HTML, this is just the markup
 required by the plugin (although home button is optional).
 
-###Javascript###
+###Javascript
 
 ```javascript
 $('#quiz').quiz({
@@ -55,7 +55,7 @@ different number of options (answers) for each question.
 
 Don't forget to include jQuery.
 
-####Options####
+####Options
 
 `allowIncorrect: boolean [default: true]`
 > If false, the quiz will show the gameOver screen if a
@@ -86,11 +86,25 @@ Don't forget to include jQuery.
 > The id selector of the results screen. This screen will
 > display the number of questions correct.
 
+`resultsFormat: string [default: 'You got %score out of %total correct!']`
+> Specify the results format. The placehoder `%score`
+> displays how many questions you got correct. The placeholder
+> `%total` displays the total number of questions.
+
 `gameOverScreen: string [default: '#quiz-gameover-screen']`
 > The id selector of the game over screen. This screen is
 > used when `allowIncorrect` is set to false.
 
-####Callbacks####
+`nextButtonText: string [default: 'Next']`
+> The text to display on the next button.
+
+`finishButtonText: string [default: 'Finish']`
+> The text to display on the finish button.
+
+`restartButtonText: string [default: 'Restart']`
+> The text to display on the restart button.
+
+####Callbacks
 
 `answerCallback: function [default: undefined]`
 > Callback fired after an answer is selected.
