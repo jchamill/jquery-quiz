@@ -35,7 +35,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../dist/jquery.quiz-min.js"></script>
 <script>
-  var answerCallback = function(currentQuestion, correct) {
+  var answerCallback = function(currentQuestion, selected, question) {
+
+    // Determine if the question was correct.
+    if (selected === question.correctIndex) {
+      console.log('Correct');
+    } else {
+      console.log('Incorrect')
+
+      // Highlight correct answer.
+      $('.active-question ul.answers a[data-index=' + question.correctIndex + ']').addClass('hint');
+    }
+
     var $videoContainer = $('#video-' + currentQuestion);
     $('#quiz-response').hide();
     $('#quiz-controls').prepend($videoContainer);

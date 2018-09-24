@@ -145,7 +145,7 @@
         $('#quiz-controls').fadeIn();
 
         if (typeof base.options.answerCallback === 'function') {
-          base.options.answerCallback(currentQuestion, selected === correct);
+          base.options.answerCallback(currentQuestion, selected, questions[currentQuestionIndex]);
         }
       },
       nextQuestion: function() {
