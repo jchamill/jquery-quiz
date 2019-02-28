@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery Quiz: Custom Scoring</title>
+  <link rel="stylesheet" type="text/css" href="../dist/jquery.quiz-min.css" />
+</head>
+<body>
+<div id="quiz">
+  <div id="quiz-header">
+    <h1 id="quiz-logo">Custom Scoring Quiz Demo</h1>
+    <p><a id="quiz-home">Home</a></p>
+  </div>
+  <div id="quiz-start-screen">
+    <div><a href="#" id="quiz-start-btn" class="quiz-button">Click to Start</a></div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="../dist/jquery.quiz-min.js"></script>
+<script>
+  // Variable to keep track of the total score.
+  var totalScore = 0;
+
+  // Provide an answer callback to add points to the score if correct answer selected.
+  var answerCallback = function(currentQuestion, selected, question) {
+    // Check if the user got the answer correct.
+    if (selected === question.correctIndex) {
+      // Add the points as specified in the question parameters, or default to 1.
+      totalScore += question.points || 1;
+    }
+  };
+
+  // Provide a callback to reset the score. Used if the home button is clicked.
+  var resetScore = function() {
+    totalScore = 0;
+  };
+
+  // Provide a finish callback to display the score.
+  var finishCallback = function() {
+    $('#quiz-results').html('Total Score: ' + totalScore + ' Points');
+    // Be sure to reset the score.
+    totalScore = 0;
+  };
+
+  $('#quiz').quiz({
+    homeButton: '#quiz-home',
+    // Specify answer callback.
+    answerCallback: answerCallback,
+    // Specify finish callback.
+    finishCallback: finishCallback,
+    // Specify callback to reset score.
+    homeCallback: resetScore,
+    questions: [
+      {
+        'q': 'This is question 1. (5 points)',
+        'options': [
+          'True',
+          'False'
+        ],
+        'correctIndex': 0,
+        'correctResponse': 'Correct!',
+        'incorrectResponse': 'Incorrect',
+        'points': 5 // Set point value, we check for this in the answer callback.
+      },
+      {
+        'q': 'This is question 3. (10 points)',
+        'options': [
+          'True',
+          'False'
+        ],
+        'correctIndex': 1,
+        'correctResponse': 'Correct!',
+        'incorrectResponse': 'Incorrect',
+        'points': 10
+      },
+      {
+        'q': 'This is question 3. (1 point)',
+        'options': [
+          'True',
+          'False'
+        ],
+        'correctIndex': 0,
+        'correctResponse': 'Correct!',
+        'incorrectResponse': 'Incorrect'
+      },
+      {
+        'q': 'This is question 5. (3 points)',
+        'options': [
+          'True',
+          'False'
+        ],
+        'correctIndex': 1,
+        'correctResponse': 'Correct!',
+        'incorrectResponse': 'Incorrect',
+        'points': 3
+      },
+      {
+        'q': 'This is question 5. (1 point)',
+        'options': [
+          'True',
+          'False'
+        ],
+        'correctIndex': 0,
+        'correctResponse': 'Correct!',
+        'incorrectResponse': 'Incorrect'
+      }
+    ]
+  });
+</script>
+</body>
+</html>
