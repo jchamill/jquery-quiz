@@ -168,6 +168,8 @@
 
         base.methods.updateCounter();
 
+        $(window).scrollTop(base.$el.position.top);
+
         if (typeof base.options.nextCallback === 'function') {
           base.options.nextCallback();
         }
