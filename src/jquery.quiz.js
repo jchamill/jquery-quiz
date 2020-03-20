@@ -141,7 +141,7 @@
           }
         }
 
-        $('#quiz-response').html(response);
+        $('#quiz-response').html(jQuery.parseHTML(response));
         $('#quiz-controls').fadeIn();
 
         if (typeof base.options.answerCallback === 'function') {
