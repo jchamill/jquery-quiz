@@ -1,4 +1,4 @@
-;(function($, window, document, undefined) {
+; (function($, window, document, undefined) {
 
   'use strict';
 
@@ -141,7 +141,7 @@
           }
         }
 
-        $('#quiz-response').html(response);
+        $('#quiz-response').html(jQuery.parseHTML(response));
         $('#quiz-controls').fadeIn();
 
         if (typeof base.options.answerCallback === 'function') {
