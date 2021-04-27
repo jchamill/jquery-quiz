@@ -104,6 +104,10 @@
         $(gameOverScreen).hide();
         $(resultsScreen).hide();
         $('#quiz-controls').hide();
+
+        if (typeof base.options.setupCallback === 'function') {
+          base.options.setupCallback();
+        }
       },
       start: function() {
         base.$el.removeClass('quiz-start-state').addClass('quiz-questions-state');
@@ -226,6 +230,10 @@
         $('#quiz-next-btn').show();
         $('#quiz-counter').hide();
         $('.active-question').hide().removeClass('active-question');
+
+        if (typeof base.options.resetCallback === 'function') {
+          base.options.resetCallback();
+        }
       },
       home: function() {
         base.methods.reset();

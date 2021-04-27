@@ -106,6 +106,9 @@ Don't forget to include jQuery.
 
 #### Callbacks
 
+`setupCallback: function [default: undefined]`
+> Callback fired after quiz is setup.
+
 `answerCallback: function [default: undefined]`
 > Callback fired after an answer is selected.
 
@@ -117,3 +120,6 @@ Don't forget to include jQuery.
 
 `homeCallback: function [default: undefined]`
 > Callback fired after the home button is clicked.
+
+`resetCallback: function [default: undefined]`
+> Callback fired after the the quiz is reset. This happens when the home and finish button are clicked.

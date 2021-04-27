@@ -35,6 +35,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../dist/jquery.quiz-min.js"></script>
 <script>
+  $.fn.shuffleChildren = function() {
+    $.each(this.get(), function(index, el) {
+      var $el = $(el);
+      var $find = $el.children();
+
+      $find.sort(function() {
+        return 0.5 - Math.random();
+      });
+
+      $el.empty();
+      $find.appendTo($el);
+    });
+  };
+
+  var shuffleQuestions = function() {
+    $('#questions').shuffleChildren();
+  };
+
   var answerCallback = function(currentQuestion, selected, question) {
 
     // Determine if the question was correct.
@@ -61,6 +79,8 @@
     //resultsScreen: '#results-screen',
     //counter: false,
     homeButton: '#quiz-home',
+    setupCallback: shuffleQuestions,
+    resetCallback: shuffleQuestions,
     answerCallback: answerCallback,
     nextCallback: removeVideo,
     finishCallback: removeVideo,
