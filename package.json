@@ -7,12 +7,6 @@
     "url": "https://github.com/jchamill"
   },
   "license": "MIT",
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-cli": "~0.1.9",
-    "grunt-contrib-uglify": "=2.4.17",
-    "grunt-contrib-cssmin": "~3.3.0"
-  },
   "main": "dist/jquery.quiz.min.js",
   "description": "A simple jQuery quiz plugin.",
   "homepage": "http://jchamill.github.com/jquery-quiz/",
@@ -25,5 +19,11 @@
   },
   "bugs": {
     "url": "https://github.com/jchamill/jquery-quiz/issues"
+  },
+  "devDependencies": {
+    "grunt": "^1.4.0",
+    "grunt-cli": "^1.4.2",
+    "grunt-contrib-cssmin": "^4.0.0",
+    "grunt-contrib-uglify": "^5.0.1"
   }
 }
