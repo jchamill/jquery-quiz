@@ -31,34 +31,40 @@
       init: function() {
         base.methods.setup();
 
-        $(document).on('click', startButton, function(e) {
-          e.preventDefault();
-          base.methods.start();
+        $(document).off('click', startButton);
+        $(document).on('click', startButton, function (e) {
+            e.preventDefault();
+            base.methods.start();
         });
 
-        $(document).on('click', homeButton, function(e) {
-          e.preventDefault();
-          base.methods.home();
+        $(document).off('click', homeButton);
+        $(document).on('click', homeButton, function (e) {
+            e.preventDefault();
+            base.methods.home();
         });
 
-        $(document).on('click', '.answers a', function(e) {
-          e.preventDefault();
-          base.methods.answerQuestion(this);
+        $(document).off('click', '.answers a');
+        $(document).on('click', '.answers a', function (e) {
+            e.preventDefault();
+            base.methods.answerQuestion(this);
         });
 
-        $(document).on('click', '#quiz-next-btn', function(e) {
-          e.preventDefault();
-          base.methods.nextQuestion();
+        $(document).off('click', '#quiz-next-btn');
+        $(document).on('click', '#quiz-next-btn', function (e) {
+            e.preventDefault();
+            base.methods.nextQuestion();
         });
 
-        $(document).on('click', '#quiz-finish-btn', function(e) {
-          e.preventDefault();
-          base.methods.finish();
+        $(document).off('click', '#quiz-finish-btn');
+        $(document).on('click', '#quiz-finish-btn', function (e) {
+            e.preventDefault();
+            base.methods.finish();
         });
 
-        $(document).on('click', '#quiz-restart-btn, #quiz-retry-btn', function(e) {
-          e.preventDefault();
-          base.methods.restart();
+        $(document).off('click', '#quiz-restart-btn, #quiz-retry-btn');
+        $(document).on('click', '#quiz-restart-btn, #quiz-retry-btn', function (e) {
+            e.preventDefault();
+            base.methods.restart();
         });
       },
       setup: function() {
