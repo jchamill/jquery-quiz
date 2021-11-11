@@ -145,6 +145,12 @@
           }
         }
 
+        // check to see if we are at the last question
+        if (currentQuestion++ === numQuestions) {
+          $('#quiz-next-btn').hide();
+          $('#quiz-finish-btn').show();
+        }
+
         $('#quiz-response').html(response);
         $('#quiz-controls').fadeIn();
 
@@ -163,12 +169,6 @@
           .addClass('active-question');
 
         $('#quiz-controls').hide();
-
-        // check to see if we are at the last question
-        if (++currentQuestion === numQuestions) {
-          $('#quiz-next-btn').hide();
-          $('#quiz-finish-btn').show();
-        }
 
         base.methods.updateCounter();
 
