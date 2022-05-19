@@ -21,7 +21,7 @@
     "url": "https://github.com/jchamill/jquery-quiz/issues"
   },
   "devDependencies": {
-    "grunt": "^1.4.0",
+    "grunt": "^1.5.2",
     "grunt-cli": "^1.4.2",
     "grunt-contrib-cssmin": "^4.0.0",
     "grunt-contrib-uglify": "^5.0.1"
