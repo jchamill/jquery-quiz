@@ -5,9 +5,19 @@
   <link rel="stylesheet" type="text/css" href="../dist/jquery.quiz-min.css" />
 </head>
 <body>
-<div id="quiz">
+<div id="quiz-1">
   <div class="quiz-header">
-    <h1>Basic Quiz Demo</h1>
+    <h1>Multiple Quiz Demo</h1>
+    <p><a class="quiz-home-btn">Home</a></p>
+  </div>
+  <div class="quiz-start-screen">
+    <p><a href="#" class="quiz-start-btn quiz-button">Start</a></p>
+  </div>
+</div>
+
+<div id="quiz-2">
+  <div class="quiz-header">
+    <h1>Another Quiz Demo</h1>
     <p><a class="quiz-home-btn">Home</a></p>
   </div>
   <div class="quiz-start-screen">
@@ -18,7 +28,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../dist/jquery.quiz-min.js"></script>
 <script>
-  $('#quiz').quiz({
+  $('#quiz-1').quiz({
     counterFormat: 'Question %current of %total',
     questions: [
       {
@@ -52,26 +62,32 @@
         'correctIndex': 0,
         'correctResponse': 'Custom correct response.',
         'incorrectResponse': 'Custom incorrect response.'
-      },
+      }
+    ]
+  });
+
+  $('#quiz-2').quiz({
+    counterFormat: 'Question %current of %total',
+    questions: [
       {
-        'q': 'A sample question?',
+        'q': 'Is this a question on the 2nd quiz?',
         'options': [
-          'Answer 1',
-          'Answer 2'
+          'True',
+          'False'
         ],
-        'correctIndex': 1,
+        'correctIndex': 0,
         'correctResponse': 'Custom correct response.',
         'incorrectResponse': 'Custom incorrect response.'
       },
       {
-        'q': 'A sample question?',
+        'q': 'How many questions are on the 1st quiz?',
         'options': [
-          'Answer 1',
-          'Answer 2',
-          'Answer 3',
-          'Answer 4'
+          'One',
+          'Two',
+          'Three',
+          'Four'
         ],
-        'correctIndex': 3,
+        'correctIndex': 2,
         'correctResponse': 'Custom correct response.',
         'incorrectResponse': 'Custom incorrect response.'
       }

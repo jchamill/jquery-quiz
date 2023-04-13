@@ -6,12 +6,12 @@
 </head>
 <body>
 <div id="quiz">
-  <div id="quiz-header">
-    <h1 id="quiz-logo">Custom Scoring Quiz Demo</h1>
-    <p><a id="quiz-home">Home</a></p>
+  <div class="quiz-header">
+    <h1 class="quiz-logo">Custom Scoring Quiz Demo</h1>
+    <p><a class="quiz-home">Home</a></p>
   </div>
-  <div id="quiz-start-screen">
-    <div><a href="#" id="quiz-start-btn" class="quiz-button">Click to Start</a></div>
+  <div class="quiz-start-screen">
+    <div><a href="#" class="quiz-start-btn quiz-button">Click to Start</a></div>
   </div>
 </div>
 
@@ -37,13 +37,13 @@
 
   // Provide a finish callback to display the score.
   var finishCallback = function() {
-    $('#quiz-results').html('Total Score: ' + totalScore + ' Points');
+    $('#quiz').find('.quiz-results').html('Total Score: ' + totalScore + ' Points');
     // Be sure to reset the score.
     totalScore = 0;
   };
 
   $('#quiz').quiz({
-    homeButton: '#quiz-home',
+    homeButton: '.quiz-home',
     // Specify answer callback.
     answerCallback: answerCallback,
     // Specify finish callback.

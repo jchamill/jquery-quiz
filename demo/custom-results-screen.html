@@ -6,29 +6,29 @@
   <style>
     /* Classes are updated on the quiz container as the state of the quiz changes. */
     /* In this demo, we hide the quiz controls restart button when we are in the results state. */
-    .quiz-results-state #quiz-controls {
+    .quiz-results-state .quiz-controls {
       display: none !important;
     }
   </style>
 </head>
 <body>
 <div id="quiz">
-  <div id="quiz-header">
+  <div class="quiz-header">
     <h1>Custom Results Screen Quiz Demo</h1>
-    <p><a id="quiz-home-btn">Home</a></p>
+    <p><a class="quiz-home-btn">Home</a></p>
   </div>
-  <div id="quiz-start-screen">
-    <p><a href="#" id="quiz-start-btn" class="quiz-button">Start</a></p>
+  <div class="quiz-start-screen">
+    <p><a href="#" class="quiz-start-btn quiz-button">Start</a></p>
   </div>
   <!-- You can just specify your own quiz results container. -->
-  <!-- Must match the id or specify your own in the config (resultsScreen). -->
-  <div id="quiz-results-screen">
+  <!-- Must match the default class or specify your own in the config (resultsScreen). -->
+  <div class="quiz-results-screen">
     <h3>Thank You!</h3>
-    <p id="quiz-results"></p>
-    <form>
+    <p class="quiz-results"></p>
+    <form id="results-form">
       <p>
         <label for="email">Email</label>
-        <input id="email" type="email" name="email">
+        <input type="email" name="email">
       </p>
       <p><button type="submit">Submit</button></p>
     </form>
@@ -38,6 +38,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="../dist/jquery.quiz-min.js"></script>
 <script>
+  $('#results-form').on('submit', function(e) {
+    e.preventDefault();
+    $(this).remove();
+    console.log('Do Ajax Submit');
+  });
   $('#quiz').quiz({
     counterFormat: 'Question %current of %total',
     questions: [

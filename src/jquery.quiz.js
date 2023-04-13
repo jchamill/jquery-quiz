@@ -1,5 +1,13 @@
-;(function($, window, document, undefined) {
-
+;(function(factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define(['jquery'], factory);
+  } else if (typeof exports !== 'undefined') {
+    module.exports = factory(require('jquery'));
+  } else {
+    factory(jQuery);
+  }
+}(function($) {
   'use strict';
 
   $.quiz = function(el, options) {
@@ -16,47 +24,61 @@
     var questions = base.options.questions,
       numQuestions = questions.length,
       startScreen = base.options.startScreen,
+      $startScreen = base.$el.find(startScreen),
       startButton = base.options.startButton,
       homeButton = base.options.homeButton,
       resultsScreen = base.options.resultsScreen,
+      $resultsScreen = base.$el.find(resultsScreen),
       gameOverScreen = base.options.gameOverScreen,
+      $gameOverScreen = base.$el.find(gameOverScreen),
       nextButtonText = base.options.nextButtonText,
       finishButtonText = base.options.finishButtonText,
       restartButtonText = base.options.restartButtonText,
       currentQuestion = 1,
       score = 0,
-      answerLocked = false;
+      answerLocked = false,
+      $quizResults = null,
+      $quizNextBtn = null,
+      $quizFinishBtn = null,
+      $quizRestartBtn = null,
+      $quizControls = null,
+      $questions = null,
+      $quizCounter = null,
+      $quizResponse = null,
+      $questionContainer = null;
 
     base.methods = {
       init: function() {
         base.methods.setup();
 
-        $(document).on('click', startButton, function(e) {
+        base.$el.off();
+
+        base.$el.on('click', startButton, function(e) {
           e.preventDefault();
           base.methods.start();
         });
 
-        $(document).on('click', homeButton, function(e) {
+        base.$el.on('click', homeButton, function(e) {
           e.preventDefault();
           base.methods.home();
         });
 
-        $(document).on('click', '.answers a', function(e) {
+        base.$el.on('click', '.answers a', function(e) {
           e.preventDefault();
           base.methods.answerQuestion(this);
         });
 
-        $(document).on('click', '#quiz-next-btn', function(e) {
+        base.$el.on('click', '.quiz-next-btn', function(e) {
           e.preventDefault();
           base.methods.nextQuestion();
         });
 
-        $(document).on('click', '#quiz-finish-btn', function(e) {
+        base.$el.on('click', '.quiz-finish-btn', function(e) {
           e.preventDefault();
           base.methods.finish();
         });
 
-        $(document).on('click', '#quiz-restart-btn, #quiz-retry-btn', function(e) {
+        base.$el.on('click', '.quiz-restart-btn, .quiz-retry-btn', function(e) {
           e.preventDefault();
           base.methods.restart();
         });
@@ -65,10 +87,10 @@
         var quizHtml = '';
 
         if (base.options.counter) {
-          quizHtml += '<div id="quiz-counter"></div>';
+          quizHtml += '<div class="quiz-counter"></div>';
         }
 
-        quizHtml += '<div id="questions">';
+        quizHtml += '<div class="questions">';
         $.each(questions, function(i, question) {
           quizHtml += '<div class="question-container">';
           quizHtml += '<p class="question">' + question.q + '</p>';
@@ -82,28 +104,41 @@
         quizHtml += '</div>';
 
         // if results screen not in DOM, add it
-        if ($(resultsScreen).length === 0) {
-          quizHtml += '<div id="' + resultsScreen.substr(1) + '">';
-          quizHtml += '<p id="quiz-results"></p>';
+        if ($resultsScreen.length === 0) {
+          quizHtml += '<div class="' + resultsScreen.substr(1) + '">';
+          quizHtml += '<p class="quiz-results"></p>';
           quizHtml += '</div>';
         }
 
-        quizHtml += '<div id="quiz-controls">';
-        quizHtml += '<p id="quiz-response"></p>';
-        quizHtml += '<div id="quiz-buttons">';
-        quizHtml += '<a href="#" id="quiz-next-btn">' + nextButtonText + '</a>';
-        quizHtml += '<a href="#" id="quiz-finish-btn">' + finishButtonText + '</a>';
-        quizHtml += '<a href="#" id="quiz-restart-btn">' + restartButtonText + '</a>';
+        quizHtml += '<div class="quiz-controls">';
+        quizHtml += '<p class="quiz-response"></p>';
+        quizHtml += '<div class="quiz-buttons">';
+        quizHtml += '<a href="#" class="quiz-next-btn">' + nextButtonText + '</a>';
+        quizHtml += '<a href="#" class="quiz-finish-btn">' + finishButtonText + '</a>';
+        quizHtml += '<a href="#" class="quiz-restart-btn">' + restartButtonText + '</a>';
         quizHtml += '</div>';
         quizHtml += '</div>';
 
         base.$el.append(quizHtml).addClass('quiz-container quiz-start-state');
 
-        $('#quiz-counter').hide();
-        $('.question-container').hide();
-        $(gameOverScreen).hide();
-        $(resultsScreen).hide();
-        $('#quiz-controls').hide();
+        if ($resultsScreen.length === 0) {
+          $resultsScreen = base.$el.find(resultsScreen);
+        }
+        $quizResults = base.$el.find('.quiz-results');
+        $quizControls = base.$el.find('.quiz-controls');
+        $questions = base.$el.find('.questions');
+        $quizCounter = base.$el.find('.quiz-counter');
+        $quizResponse = base.$el.find('.quiz-response');
+        $questionContainer = base.$el.find('.question-container');
+        $quizNextBtn = base.$el.find('.quiz-next-btn');
+        $quizFinishBtn = base.$el.find('.quiz-finish-btn');
+        $quizRestartBtn = base.$el.find('.quiz-restart-btn');
+
+        $quizCounter.hide();
+        $questionContainer.hide();
+        $gameOverScreen.hide();
+        $resultsScreen.hide();
+        $quizControls.hide();
 
         if (typeof base.options.setupCallback === 'function') {
           base.options.setupCallback();
@@ -111,13 +146,13 @@
       },
       start: function() {
         base.$el.removeClass('quiz-start-state').addClass('quiz-questions-state');
-        $(startScreen).hide();
-        $('#quiz-controls').hide();
-        $('#quiz-finish-btn').hide();
-        $('#quiz-restart-btn').hide();
-        $('#questions').show();
-        $('#quiz-counter').show();
-        $('.question-container:first-child').show().addClass('active-question');
+        $startScreen.hide();
+        $quizControls.hide();
+        $quizFinishBtn.hide();
+        $quizRestartBtn.hide();
+        $questions.show();
+        $quizCounter.show();
+        $questionContainer.first().show().addClass('active-question');
         base.methods.updateCounter();
       },
       answerQuestion: function(answerEl) {
@@ -147,12 +182,12 @@
 
         // check to see if we are at the last question
         if (currentQuestion++ === numQuestions) {
-          $('#quiz-next-btn').hide();
-          $('#quiz-finish-btn').show();
+          $quizNextBtn.hide();
+          $quizFinishBtn.show();
         }
 
-        $('#quiz-response').html(response);
-        $('#quiz-controls').fadeIn();
+        $quizResponse.html(response);
+        $quizControls.fadeIn();
 
         if (typeof base.options.answerCallback === 'function') {
           base.options.answerCallback(currentQuestion, selected, questions[currentQuestionIndex]);
@@ -161,14 +196,14 @@
       nextQuestion: function() {
         answerLocked = false;
 
-        $('.active-question')
+        base.$el.find('.active-question')
           .hide()
           .removeClass('active-question')
           .next('.question-container')
           .show()
           .addClass('active-question');
 
-        $('#quiz-controls').hide();
+        $quizControls.hide();
 
         base.methods.updateCounter();
 
@@ -178,31 +213,31 @@
       },
       gameOver: function(response) {
         // if gameover screen not in DOM, add it
-        if ($(gameOverScreen).length === 0) {
+        if ($gameOverScreen.length === 0) {
           var quizHtml = '';
-          quizHtml += '<div id="' + gameOverScreen.substr(1) + '">';
-          quizHtml += '<p id="quiz-gameover-response"></p>';
-          quizHtml += '<p><a href="#" id="quiz-retry-btn">' + restartButtonText + '</a></p>';
+          quizHtml += '<div class="' + gameOverScreen.substr(1) + '">';
+          quizHtml += '<p class="quiz-gameover-response"></p>';
+          quizHtml += '<p><a href="#" class="quiz-retry-btn">' + restartButtonText + '</a></p>';
           quizHtml += '</div>';
           base.$el.append(quizHtml);
         }
-        $('#quiz-gameover-response').html(response);
-        $('#quiz-counter').hide();
-        $('#questions').hide();
-        $('#quiz-finish-btn').hide();
-        $(gameOverScreen).show();
+        base.$el.find('.quiz-gameover-response').html(response);
+        $quizCounter.hide();
+        $questions.hide();
+        $quizFinishBtn.hide();
+        $gameOverScreen.show();
       },
       finish: function() {
         base.$el.removeClass('quiz-questions-state').addClass('quiz-results-state');
-        $('.active-question').hide().removeClass('active-question');
-        $('#quiz-counter').hide();
-        $('#quiz-response').hide();
-        $('#quiz-finish-btn').hide();
-        $('#quiz-next-btn').hide();
-        $('#quiz-restart-btn').show();
-        $(resultsScreen).show();
+        base.$el.find('.active-question').hide().removeClass('active-question');
+        $quizCounter.hide();
+        $quizResponse.hide();
+        $quizFinishBtn.hide();
+        $quizNextBtn.hide();
+        $quizRestartBtn.show();
+        $resultsScreen.show();
         var resultsStr = base.options.resultsFormat.replace('%score', score).replace('%total', numQuestions);
-        $('#quiz-results').html(resultsStr);
+        $quizResults.html(resultsStr);
 
         if (typeof base.options.finishCallback === 'function') {
           base.options.finishCallback();
@@ -211,25 +246,25 @@
       restart: function() {
         base.methods.reset();
         base.$el.addClass('quiz-questions-state');
-        $('#questions').show();
-        $('#quiz-counter').show();
-        $('.question-container:first-child').show().addClass('active-question');
+        $questions.show();
+        $quizCounter.show();
+        $questionContainer.first().show().addClass('active-question');
         base.methods.updateCounter();
       },
       reset: function() {
         answerLocked = false;
         currentQuestion = 1;
         score = 0;
-        $('.answers a').removeClass('correct incorrect');
+        base.$el.find('.answers a').removeClass('correct incorrect');
         base.$el.removeClass().addClass('quiz-container');
-        $('#quiz-restart-btn').hide();
-        $(gameOverScreen).hide();
-        $(resultsScreen).hide();
-        $('#quiz-controls').hide();
-        $('#quiz-response').show();
-        $('#quiz-next-btn').show();
-        $('#quiz-counter').hide();
-        $('.active-question').hide().removeClass('active-question');
+        $quizRestartBtn.hide();
+        $gameOverScreen.hide();
+        $resultsScreen.hide();
+        $quizControls.hide();
+        $quizResponse.show();
+        $quizNextBtn.show();
+        $quizCounter.hide();
+        base.$el.find('.active-question').hide().removeClass('active-question');
 
         if (typeof base.options.resetCallback === 'function') {
           base.options.resetCallback();
@@ -238,7 +273,7 @@
       home: function() {
         base.methods.reset();
         base.$el.addClass('quiz-start-state');
-        $(startScreen).show();
+        $startScreen.show();
 
         if (typeof base.options.homeCallback === 'function') {
           base.options.homeCallback();
@@ -246,7 +281,7 @@
       },
       updateCounter: function() {
         var countStr = base.options.counterFormat.replace('%current', currentQuestion).replace('%total', numQuestions);
-        $('#quiz-counter').html(countStr);
+        $quizCounter.html(countStr);
       }
     };
 
@@ -257,12 +292,12 @@
     allowIncorrect: true,
     counter: true,
     counterFormat: '%current/%total',
-    startScreen: '#quiz-start-screen',
-    startButton: '#quiz-start-btn',
-    homeButton: '#quiz-home-btn',
-    resultsScreen: '#quiz-results-screen',
+    startScreen: '.quiz-start-screen',
+    startButton: '.quiz-start-btn',
+    homeButton: '.quiz-home-btn',
+    resultsScreen: '.quiz-results-screen',
     resultsFormat: 'You got %score out of %total correct!',
-    gameOverScreen: '#quiz-gameover-screen',
+    gameOverScreen: '.quiz-gameover-screen',
     nextButtonText: 'Next',
     finishButtonText: 'Finish',
     restartButtonText: 'Restart'
@@ -273,4 +308,4 @@
       new $.quiz(this, options);
     });
   };
-}(jQuery, window, document));
+}));

@@ -6,21 +6,21 @@
 </head>
 <body>
 <div id="quiz">
-  <div id="quiz-header">
-    <h1 id="custom-logo">No Fail Quiz Demo</h1>
-    <p><a id="custom-home">Home</a></p>
+  <div class="quiz-header">
+    <h1 class="custom-logo">No Fail Quiz Demo</h1>
+    <p><a class="custom-home">Home</a></p>
   </div>
-  <div id="quiz-start-screen">
+  <div class="quiz-start-screen">
     <h1>Custom Start Screen</h1>
-    <div><a href="#" id="quiz-start-btn" class="quiz-button">Begin</a></div>
+    <div><a href="#" class="quiz-start-btn quiz-button">Begin</a></div>
   </div>
-  <div id="quiz-results-screen">
+  <div class="quiz-results-screen">
     <h2>You did it!</h2>
   </div>
-  <div id="quiz-gameover-screen">
+  <div class="quiz-gameover-screen">
     <h2>Sorry, you failed!</h2>
-    <p id="quiz-gameover-response"></p>
-    <p><a href="#" id="quiz-retry-btn">Retry</a></p>
+    <p class="quiz-gameover-response"></p>
+    <p><a href="#" class="quiz-retry-btn">Retry</a></p>
   </div>
 </div>
 
@@ -28,9 +28,9 @@
 <script src="../dist/jquery.quiz-min.js"></script>
 <script>
   $('#quiz').quiz({
-    //resultsScreen: '#results-screen',
+    //resultsScreen: '.results-screen',
     //counter: false,
-    homeButton: '#custom-home',
+    homeButton: '.custom-home',
     counterFormat: 'Question %current',
     allowIncorrect: false,
     questions: [
