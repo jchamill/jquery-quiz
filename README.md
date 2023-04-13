@@ -15,13 +15,13 @@ as the text displayed.
 
 ```
 <div id="quiz">
-  <div id="quiz-header">
+  <div class="quiz-header">
     <h1>Basic Quiz Demo</h1>
     <!-- Optionally add a home button -->
-    <p><a id="quiz-home-btn">Home</a></p>
+    <p><a class="quiz-home-btn">Home</a></p>
   </div>
-  <div id="quiz-start-screen">
-    <p><a href="#" id="quiz-start-btn" class="quiz-button">Start</a></p>
+  <div class="quiz-start-screen">
+    <p><a href="#" class="quiz-start-btn quiz-button">Start</a></p>
   </div>
 </div>
 ```
@@ -72,17 +72,17 @@ Don't forget to include jQuery.
 > displays which question you are currently on. The placeholder
 > `%total` displays the total number of questions.
 
-`startScreen: string [default: '#quiz-start-screen']`
+`startScreen: string [default: '.quiz-start-screen']`
 > The id selector of the start screen. The start screen should
 > contain the start button.
 
-`startButton: string [default: '#quiz-start-btn']`
+`startButton: string [default: '.quiz-start-btn']`
 > The id selector of the start button.
 
-`homeButton: string [default: '#quiz-home-btn']`
+`homeButton: string [default: '.quiz-home-btn']`
 > The id selector of the home button.
 
-`resultsScreen: string [default: '#quiz-results-screen']`
+`resultsScreen: string [default: '.quiz-results-screen']`
 > The id selector of the results screen. This screen will
 > display the number of questions correct.
 
@@ -91,7 +91,7 @@ Don't forget to include jQuery.
 > displays how many questions you got correct. The placeholder
 > `%total` displays the total number of questions.
 
-`gameOverScreen: string [default: '#quiz-gameover-screen']`
+`gameOverScreen: string [default: '.quiz-gameover-screen']`
 > The id selector of the game over screen. This screen is
 > used when `allowIncorrect` is set to false.
 
