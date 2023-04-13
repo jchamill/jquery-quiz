@@ -2,6 +2,8 @@
 
 A simple jQuery quiz plugin.
 
+[Demo](https://jchamill.com/projects/jquery-quiz)
+
 ## Disclaimer
 
 This is a very simple quiz plugin I created to port quizzes from
