@@ -82,6 +82,10 @@
           e.preventDefault();
           base.methods.restart();
         });
+
+        if (base.options.initialStart) {
+          this.start()
+        }
       },
       setup: function() {
         var quizHtml = '';
@@ -291,6 +295,7 @@
   $.quiz.defaultOptions = {
     allowIncorrect: true,
     counter: true,
+    initialStart: false,
     counterFormat: '%current/%total',
     startScreen: '.quiz-start-screen',
     startButton: '.quiz-start-btn',
@@ -300,7 +305,7 @@
     gameOverScreen: '.quiz-gameover-screen',
     nextButtonText: 'Next',
     finishButtonText: 'Finish',
-    restartButtonText: 'Restart'
+    restartButtonText: 'Restart',
   };
 
   $.fn.quiz = function(options) {
